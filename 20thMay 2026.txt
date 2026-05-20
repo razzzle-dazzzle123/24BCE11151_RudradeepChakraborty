@@ -1,0 +1,151 @@
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) UNIQUE NOT NULL,
+    FirstName varchar(255) NOT NULL,
+    Age int,
+    CHECK (Age>=18)
+);
+
+DESC Persons;
+
+INSERT INTO Persons (ID, LastName, FirstName, Age) VALUES 
+(101, 'Chakraborty', 'Rudradeep', NULL),
+(102, 'Sharma', 'Rahul', 21),
+(103, 'Verma', 'Aditi', 20),
+(104, 'Das', 'Siddharth', 22),
+(105, 'Patel', 'Ananya', 19);
+
+SELECT * FROM Persons;
+
+ALTER TABLE Persons
+ADD CONSTRAINT UC_Age UNIQUE (Age);
+
+DESC Persons;
+
+ALTER TABLE Persons
+DROP INDEX UC_Age;
+
+DESC Persons;
+
+
+
+
+
+
+CREATE DATABASE IF NOT EXISTS vitcampus;
+USE vitcampus;
+
+
+CREATE TABLE persons3 (
+    pid INT NOT NULL,
+    pname VARCHAR(100) NOT NULL,
+    marks INT NOT NULL UNIQUE
+);
+
+DESC persons;
+
+INSERT INTO persons3 (pid, pname, marks) VALUES 
+(1, 'Rudra', 1001),
+(2, 'rav', 1004),
+(3, 'mike', 1002);
+
+SELECT * FROM persons3;
+
+ALTER TABLE persons3 ADD PRIMARY KEY (pid);
+
+DESC persons3;
+
+ALTER TABLE persons3
+DROP PRIMARY KEY;
+
+DESC persons3;
+
+
+
+
+
+CREATE DATABASE IF NOT EXISTS vitcampus;
+USE vitcampus;
+
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS category;
+DROP TABLE IF EXISTS Persons1;
+DROP TABLE IF EXISTS Persons;
+
+
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) UNIQUE NOT NULL,
+    FirstName varchar(255) NOT NULL,
+    Age int,
+    CONSTRAINT CHK_AgeRange CHECK (Age >= 18 AND Age <= 23)
+);
+
+
+DESC Persons;
+
+INSERT INTO Persons (ID, LastName, FirstName, Age) VALUES 
+(101, 'Chakraborty', 'Rudradeeo', 21),
+(102, 'Sharma', 'Rahul', 19),
+(103, 'Verma', 'Aditi', 22);
+
+SELECT * FROM Persons;
+
+ALTER TABLE Persons
+ADD CONSTRAINT UC_ExplicitAge UNIQUE (Age);
+
+ALTER TABLE Persons
+DROP INDEX UC_ExplicitAge;
+
+ALTER TABLE Persons
+ADD PRIMARY KEY (ID);
+
+ALTER TABLE Persons
+DROP PRIMARY KEY;
+
+
+CREATE TABLE Persons1 (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    City varchar(255) DEFAULT 'Bhopal'
+);
+
+DESC Persons1;
+
+INSERT INTO Persons1 (ID, LastName, FirstName, Age) VALUES 
+(201, 'Pandey', 'Anant', 20);
+
+SELECT * FROM Persons1;
+
+
+CREATE TABLE category (
+    cid int PRIMARY KEY,
+    cname varchar(100) NOT NULL
+);
+
+INSERT INTO category (cid, cname) VALUES 
+(101, 'electronics'),
+(102, 'Home Appliances');
+
+SELECT * FROM category;
+
+
+
+CREATE TABLE products (
+    pid int PRIMARY KEY,
+    pname varchar(100) NOT NULL,
+    prefNo int NOT NULL UNIQUE,
+    cid int,
+    CONSTRAINT FK_CategoryProduct FOREIGN KEY (cid) REFERENCES category(cid)
+);
+
+DESC products;
+
+INSERT INTO products (pid, pname, prefNo, cid) VALUES 
+(501, 'furniture', 19930, NULL),
+(502, 'Laptop', 19931, 101),
+(503, 'Refrigerator', 19932, 102);
+
+SELECT * FROM products;
