@@ -1,0 +1,54 @@
+CREATE TABLE products (
+    pid int primary key,
+    pname varchar(100) NOT NULL,
+    cid int, 
+    FOREIGN KEY (cid) REFERENCES category(cid) on delete cascade on update cascade
+);
+desc products;
+select * from category;
+
+delete from category where cid=101;
+update category set cid =148 where cname ='electronics';
+
+insert into products values (442,'Mouse EVOFOX',148);
+
+select * from products;
+
+show databases;
+use vitcampus;
+show tables in vitcampus;
+select * from worker;
+
+select first_name ,department ,salary from worker where department ='admin' order by salary desc;
+
+select count(worker_id) from worker where department ='admin' or department='HR' ;
+
+select department ,count(department) from worker group by department order by department asc  ;
+
+select department ,count(department) from worker group by department having count(department)>3 order by department asc  ;
+
+
+select * from worker limit 3 offset 3;
+
+create table bestemp(id int );
+
+insert into bestemp value (1),(2);
+
+select * from bestemp ;
+
+select worker_id ,first_name ,department from worker 
+where worker_id in (select id from bestemp);
+
+select * from worker ; 
+
+
+
+//todays extra questions
+
+
+select sum(salary), department from worker group by department order by sum(salary) asc limit 2;
+select first_name, department, salary from worker where department = 'ADMIN' order by salary desc limit 1 offset 1;
+
+select department, max(salary) as largest_salary
+from worker
+group by department;
