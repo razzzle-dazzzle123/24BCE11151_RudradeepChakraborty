@@ -1,0 +1,19 @@
+show databases
+show dbs
+use vit
+db
+db.dropDatabase()
+show dbs
+use vit
+show dbs
+cls
+db
+db.createCollection("student")
+show collections
+db.Student.drop()
+show collection
+db.createCollection("Employee")
+db.Employee.insert({name:"Rudradeep",dept:"ECE"})
+db.Employee.insert({name:"Roderick",marks:98,location:"guwahati"})
+db.Employee.find()
+db.Employee.find()
